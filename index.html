@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="UNAKÉ, una serie de animación de VOPPË. Pásate, trastea y cuéntanos qué te parece.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pásate por Unaké">
+<meta property="og:description" content="Una serie de animación que estamos haciendo. Entra, trastea, marca lo que te guste y mándanos tu opinión.">
+<meta property="og:image" content="https://opspilotcontact-lgtm.github.io/unake/media/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="https://opspilotcontact-lgtm.github.io/unake/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="media/titulo-a-humo.webp">
+<title>Pásate por Unaké</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,800;1,400&family=Bangers&family=Caprasimo&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --night:#120d24; --wall:#1f1738; --wall-2:#2a2049; --ink:#0b0716;
+  --text:#f3eeff; --muted:#b8acd6; --cream:#ffe8c4;
+  --neon:#ff4f9a;          /* the Unaké sign: the accent */
+  --thread:#6fe3ff;        /* the other neon of the bar, used only for connections */
+  --canon:#8fe3a1; --prop:#ffd35a; --seed:#c9b8ff;
+  --t-trama:#ffd35a; --t-personaje:#8fe3a1; --t-capitulo:#ff9ec7; --t-arte:#9fd8ff; --t-voz:#d6b0ff; --t-marca:#ffb38a; --t-duda:#eceaf2;
+  --gutter:clamp(16px,4vw,52px); --r:18px;
+  --display:"Caprasimo","Cooper Black",Georgia,serif;
+  --body:"Atkinson Hyperlegible Next","Segoe UI",system-ui,sans-serif;
+  --comic:"Bangers",Impact,sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--night);scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--text);font:400 17px/1.55 var(--body);padding-block:0 72px;
+  background-image:radial-gradient(1100px 600px at 85% 0%,#3a2366 0%,transparent 60%),radial-gradient(900px 600px at 0% 40%,#231a47 0%,transparent 60%);background-attachment:fixed}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:var(--gutter)}
+img,video{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;line-height:1.06;text-wrap:balance;margin:0}
+h2{font-size:clamp(36px,5.2vw,62px);color:var(--cream);text-shadow:3px 4px 0 var(--ink)}
+h3{font-size:clamp(22px,2.4vw,28px);color:var(--cream)}
+h4{font-size:20px;color:var(--cream)}
+p{margin:0}
+a{color:var(--neon)}
+button,select,textarea,input{font:inherit}
+:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+.eyebrow{font:800 13px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:clamp(18px,2.1vw,21px);max-width:64ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+section{padding-block:clamp(64px,9vw,110px) 0}
+.sec-head{display:grid;gap:14px;margin-bottom:36px;max-width:72ch}
+.drawn{background:var(--wall);border:3px solid var(--ink);border-radius:var(--r);box-shadow:6px 7px 0 var(--ink)}
+.pill{display:inline-flex;align-items:center;gap:6px;font:800 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:5px 9px 4px;border-radius:99px;border:2px solid var(--ink);color:var(--ink);white-space:nowrap}
+.pill.canon{background:var(--canon)} .pill.prop{background:var(--prop)} .pill.seed{background:var(--seed)} .pill.pend{background:#eceaf2}
+.bubble{font:400 21px/1.05 var(--comic);letter-spacing:.02em;color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:20px;padding:9px 15px 7px;position:relative;width:fit-content;max-width:100%;box-shadow:4px 5px 0 var(--ink)}
+.bubble::after{content:"";position:absolute;bottom:-12px;left:22px;width:18px;height:18px;background:#fff;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg) skew(8deg,8deg)}
+.btn{font:800 15px/1 var(--body);color:var(--ink);background:var(--cream);border:3px solid var(--ink);border-radius:99px;padding:11px 18px;box-shadow:3px 4px 0 var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn.hot{background:var(--neon);color:#fff}
+.btn:active{transform:translate(2px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn[disabled]{opacity:.5;cursor:default}
+.icon{width:18px;height:18px;flex:none}
+
+/* ---------- the annotate chip every idea carries ---------- */
+.anota{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap}
+.anota button{font:800 13px/1 var(--body);border:2px solid var(--ink);border-radius:99px;padding:6px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:2px 3px 0 var(--ink)}
+.anota .count{background:var(--wall-2);color:var(--text)}
+.anota .count[data-n="0"]{color:var(--muted)}
+.anota .add{background:var(--neon);color:#fff}
+.anota .vote{background:#fff;color:var(--ink)}
+.anota .vote[aria-pressed="true"]{background:var(--thread)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:#120d24e6;backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
+.nav .wrap{display:flex;align-items:center;gap:18px;min-height:58px;flex-wrap:wrap}
+.nav img{height:34px;width:auto}
+.nav nav{display:flex;gap:4px 16px;flex-wrap:wrap;flex:1}
+.nav nav a{color:var(--text);text-decoration:none;font-weight:800;font-size:14px;letter-spacing:.04em}
+.nav nav a:hover{color:var(--neon)}
+.nav .notes-pill{margin-left:auto}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:3px solid var(--ink)}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#120d24 0%,#120d24cc 38%,#120d2433 70%,#120d2400 100%),linear-gradient(0deg,#120d24 0%,transparent 35%)}
+.hero .wrap{position:relative;z-index:1;display:grid;gap:22px;padding-block:clamp(48px,8vw,96px) clamp(40px,6vw,70px)}
+.hero .logo{width:min(560px,92%);filter:drop-shadow(0 10px 30px #ff4f9a55)}
+.hero .loop{display:flex;gap:12px;flex-wrap:wrap}
+.hero .loop .bubble:nth-child(2){transform:translateY(10px)}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .lead{max-width:56ch}
+
+/* ---------- the world: rules as the bar's neon signs ---------- */
+.world-top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:26px;align-items:start;margin-bottom:34px}
+.world-top .drawn{padding:24px 26px;display:grid;gap:12px}
+.motto{font-family:var(--display);font-size:clamp(30px,4vw,46px);color:var(--neon);text-shadow:3px 4px 0 var(--ink);line-height:1.05}
+.dialog-loop{display:grid;gap:10px}
+.dialog-loop p{font-size:16px}
+.dialog-loop b{color:var(--cream)}
+.signs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:18px;padding:26px;border-radius:var(--r);border:3px solid var(--ink);
+  background:repeating-linear-gradient(0deg,#1a1330 0 26px,#17112b 26px 28px),#1a1330}
+.sign{border:3px solid #ffffff22;border-radius:14px;padding:16px 16px 14px;display:grid;gap:8px;align-content:start;background:#0b071699}
+.sign h4{font-size:19px;color:var(--c,#ff8fc0);text-shadow:0 0 12px var(--c,#ff4f9a),0 0 2px var(--c,#ff4f9a)}
+.sign p{font-size:15px;color:var(--muted)}
+.cycle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:34px}
+.phase{padding:16px;display:grid;gap:6px;align-content:start;position:relative}
+.phase .n{font:400 36px/1 var(--display);color:var(--neon);text-shadow:2px 3px 0 var(--ink)}
+.phase p{font-size:15px;color:var(--muted)}
+.phase:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:22px;font:800 20px/1 var(--body);color:var(--neon)}
+
+/* ---------- the cast by altitude ---------- */
+.altimeter{display:grid;grid-template-columns:110px minmax(0,1fr)}
+.band{display:contents}
+.band-label{border-right:4px dashed #ffffff30;padding:20px 16px 0 0;text-align:right;position:relative}
+.band-label strong{display:block;font:400 25px/1 var(--display);color:var(--cream);text-shadow:2px 3px 0 var(--ink)}
+.band-label span{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+.band-label::after{content:"";position:absolute;right:-12px;top:26px;width:20px;height:20px;border-radius:50%;background:var(--neon);border:3px solid var(--ink)}
+.band-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:22px;padding:16px 0 32px 32px}
+.char{display:grid;grid-template-rows:auto 1fr;overflow:hidden}
+.char .stage{position:relative;height:220px;background:linear-gradient(180deg,var(--c2) 0%,var(--wall) 100%);border-bottom:3px solid var(--ink);display:grid;place-items:end center;padding-bottom:10px}
+.char .stage img{height:180px;width:auto;filter:drop-shadow(0 8px 0 #0b071655)}
+.char .stage .bubble{position:absolute;top:12px;left:12px;font-size:18px;z-index:2;max-width:calc(100% - 24px)}
+.char .body{padding:18px 20px 20px;display:grid;gap:10px;align-content:start}
+.char h3{font-size:30px;color:var(--c);text-shadow:2px 3px 0 var(--ink)}
+.char .sense{font:800 13px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.char dl{margin:0;display:grid;gap:4px;font-size:15px}
+.char dt{font-weight:800;color:var(--muted);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;margin-top:4px}
+.char dd{margin:0}
+.voices{display:grid;gap:8px;margin-top:4px}
+.voice{display:flex;gap:10px;align-items:center;background:var(--wall-2);border:2px solid var(--ink);border-radius:12px;padding:8px 10px}
+.voice button{flex:none;width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);background:var(--c);cursor:pointer;display:grid;place-items:center}
+.voice span{font-size:14px;line-height:1.3}
+.voice i{display:block;height:3px;background:var(--c);width:0;border-radius:2px;margin-top:4px}
+.char .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px}
+
+/* ---------- chapters as proposals: index cards on the writers' room wall ---------- */
+.cork{border-radius:var(--r);border:3px solid var(--ink);padding:clamp(18px,3vw,30px);background:radial-gradient(#3a2a26 1px,transparent 1.6px) 0 0/14px 14px,#2c211d}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:22px}
+.card{background:#fbf6ea;color:#231a2e;border-radius:6px;padding:18px 18px 14px;box-shadow:4px 6px 0 #0b071688;display:grid;gap:9px;align-content:start;position:relative;border-top:14px solid var(--c,#ff9ec7)}
+.card:nth-child(3n+1){transform:rotate(-.6deg)} .card:nth-child(3n+2){transform:rotate(.5deg)}
+.card::before{content:"";position:absolute;top:-22px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--neon);border:3px solid var(--ink)}
+.card .code{font:400 34px/1 var(--display);color:#231a2e}
+.card h4{color:#231a2e;font-size:22px}
+.card p{font-size:15px}
+.card .persona{font-size:14px;color:#5b4f63}
+.card .cast{display:flex;gap:4px;flex-wrap:wrap}
+.card > .pill,.card > .anota{justify-self:start}
+#eps{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.card .cast img{width:34px;height:34px;object-fit:contain;background:#eee6d4;border-radius:50%;border:2px solid #231a2e}
+.card .anota .count{background:#eee6d4;color:#231a2e}
+.card .anota .count[data-n="0"]{color:#8a7f90}
+.cork h3{color:var(--cream);margin:6px 0 16px}
+.cork h3:not(:first-child){margin-top:34px}
+.e00-player{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:26px;align-items:center;margin-top:34px}
+.e00-player video{width:100%;aspect-ratio:16/9;background:#000;border-radius:14px;border:3px solid var(--ink);box-shadow:6px 7px 0 var(--ink)}
+.ranking{display:grid;gap:8px;counter-reset:rk;margin-top:8px}
+.ranking li{list-style:none;display:flex;gap:10px;align-items:center;background:var(--wall);border:2px solid var(--ink);border-radius:12px;padding:8px 12px;font-size:15px}
+.ranking li b{color:var(--cream)}
+.ranking li .n{font:400 22px/1 var(--display);color:var(--thread);min-width:1.6em;text-align:center}
+
+/* ---------- making-of ---------- */
+.chain{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;align-items:start}
+.step{display:grid;gap:8px}
+.step figure{margin:0;background:#0b0716;border:3px solid var(--ink);border-radius:12px;overflow:hidden;aspect-ratio:4/3;display:grid;place-items:center}
+.step figure img{width:100%;height:100%;object-fit:contain}
+.step .k{font:400 26px/1 var(--display);color:var(--neon);text-shadow:2px 3px 0 var(--ink)}
+.step p{font-size:14px;color:var(--muted)}
+.step b{color:var(--cream);font-weight:600}
+.gal-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:34px 0 16px}
+.gal-tabs button{font:800 14px/1 var(--body);border:2px solid var(--ink);border-radius:99px;padding:9px 14px;background:var(--wall-2);color:var(--text);cursor:pointer}
+.gal-tabs button[aria-selected="true"]{background:var(--cream);color:var(--ink)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:18px}
+.gallery figure{margin:0;display:grid;gap:8px;align-content:start}
+.gallery .img{border:3px solid var(--ink);border-radius:12px;overflow:hidden;background:#0b0716;position:relative;cursor:zoom-in}
+.gallery .img img{width:100%;height:auto}
+.gallery figcaption{font-size:14px;color:var(--muted)}
+.gallery figcaption b{color:var(--cream);font-weight:600}
+.gallery .img.switch{cursor:pointer}
+.gallery .img .hint{position:absolute;right:8px;bottom:8px;font:800 12px/1 var(--body);background:var(--ink);color:var(--cream);padding:6px 8px;border-radius:8px}
+.pipeline{list-style:none;margin:34px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px;counter-reset:p}
+.pipeline li{counter-increment:p;padding:14px 16px;display:grid;gap:4px}
+.pipeline li::before{content:counter(p);font:400 26px/1 var(--display);color:var(--neon);text-shadow:2px 3px 0 var(--ink)}
+.pipeline b{color:var(--cream)} .pipeline span{font-size:14px;color:var(--muted)}
+.lesson{margin-top:22px;padding:20px 24px;display:grid;gap:8px;border-color:var(--ink);background:linear-gradient(90deg,#ff4f9a22,transparent),var(--wall)}
+
+/* ---------- the writers' room ---------- */
+.room{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:26px;align-items:start}
+.composer{padding:20px;display:grid;gap:12px;position:sticky;top:78px}
+.composer label{font:800 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.types{display:flex;gap:6px;flex-wrap:wrap}
+.types button{font:800 13px/1 var(--body);border:2px solid var(--ink);border-radius:99px;padding:7px 11px;cursor:pointer;background:var(--wall-2);color:var(--text)}
+.types button[aria-pressed="true"]{background:var(--tc);color:var(--ink)}
+.composer textarea{width:100%;min-height:120px;resize:vertical;border:3px solid var(--ink);border-radius:12px;padding:12px;background:#fbf6ea;color:#231a2e;font-size:16px;line-height:1.45}
+.composer select{width:100%;border:3px solid var(--ink);border-radius:12px;padding:10px;background:var(--wall-2);color:var(--text)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:600 13px/1 var(--body);border:2px solid var(--ink);border-radius:99px;padding:6px 9px;background:var(--thread);color:var(--ink);display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+.chip.static{cursor:pointer;background:#ffffff14;color:var(--text);border-color:#ffffff2a}
+.chip.static:hover{border-color:var(--thread)}
+.status-line{font-size:14px;color:var(--muted);min-height:1.2em}
+.status-line.err{color:#ffb3b3}
+.board-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.board-tools select{border:2px solid var(--ink);border-radius:99px;padding:8px 12px;background:var(--wall-2);color:var(--text);font-size:14px}
+.board-tools .filter-item{display:inline-flex;gap:8px;align-items:center}
+.notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
+.note{background:var(--tc);color:#231a2e;border-radius:4px;padding:14px 14px 12px;box-shadow:3px 5px 0 #0b071699;display:grid;gap:8px;align-content:start;position:relative}
+.note:nth-child(odd){transform:rotate(-.5deg)} .note:nth-child(even){transform:rotate(.4deg)}
+.note .meta{display:flex;gap:8px;align-items:center;font-size:12.5px;color:#4a3f52}
+.note .meta img{width:22px;height:22px;border-radius:50%;border:2px solid #231a2e;object-fit:cover}
+.note .tipo{font:800 11px/1 var(--body);letter-spacing:.1em;text-transform:uppercase}
+.note .txt{font-size:15.5px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.note .links{display:flex;gap:5px;flex-wrap:wrap}
+.note .links button{font:600 12px/1 var(--body);border:1.5px solid #231a2e;border-radius:99px;padding:4px 8px;background:#ffffff99;color:#231a2e;cursor:pointer}
+.note .acts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.note .acts button,.note .acts select{font:800 12px/1 var(--body);border:1.5px solid #231a2e;border-radius:99px;padding:5px 9px;background:#fff;color:#231a2e;cursor:pointer}
+.note .acts button[aria-pressed="true"]{background:#231a2e;color:#fff}
+.note .state{font:800 10.5px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;padding:4px 7px;border-radius:99px;background:#231a2e;color:#fff}
+.note .state.aceptada{background:#1d7a3e} .note .state.descartada{background:#7a1d3a} .note .state.hecha{background:#1d4f7a}
+.note .replies{display:grid;gap:6px;border-top:1.5px dashed #231a2e55;padding-top:8px}
+.note .reply{font-size:14px;background:#ffffff88;border-radius:6px;padding:7px 9px;white-space:pre-wrap;overflow-wrap:anywhere}
+.note .reply b{font-size:12px}
+.note form{display:grid;gap:6px}
+.note form textarea{width:100%;min-height:60px;border:1.5px solid #231a2e;border-radius:8px;padding:8px;font-size:14px;background:#fff;color:#231a2e}
+.note.is-claude .meta b::after{content:" · IA";font-weight:400}
+.empty{padding:24px;border:3px dashed #ffffff2a;border-radius:var(--r);color:var(--muted);text-align:center}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-bottom:26px}
+.how div{padding:14px 16px;display:grid;gap:4px}
+.how b{color:var(--cream)} .how span{font-size:14px;color:var(--muted)}
+
+/* ---------- the map of threads ---------- */
+.map-wrap{margin-top:40px;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:26px;align-items:center}
+.map{background:radial-gradient(circle at 50% 50%,#2a1f4a,#120d24 70%);border:3px solid var(--ink);border-radius:var(--r);box-shadow:6px 7px 0 var(--ink)}
+.map svg{width:100%;height:auto;display:block}
+.map .node{cursor:pointer}
+.map .node text{font-family:var(--body);font-weight:800;fill:var(--text);font-size:15px}
+.map .node.inner text{font-size:13px}
+.map .dim{opacity:.18}
+.map-legend{display:grid;gap:12px}
+.map-legend p{font-size:15px;color:var(--muted)}
+.map-legend .k{display:flex;gap:10px;align-items:center;font-size:14px}
+.map-legend .k i{width:36px;height:0;border-top:2px solid #ffffff44;display:inline-block}
+.map-legend .k i.hot{border-top:4px solid var(--thread);box-shadow:0 0 8px var(--thread)}
+
+/* ---------- open questions ---------- */
+.qs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:16px}
+.q{padding:16px 18px;display:grid;gap:8px;align-content:start}
+.q b{color:var(--cream)} .q span{font-size:15px;color:var(--muted)}
+.decided{margin-top:30px;overflow-x:auto}
+.decided table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+.decided th,.decided td{text-align:left;padding:10px 12px;border-bottom:1px solid #ffffff1a;vertical-align:top}
+.decided th{font:800 12px/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.decided td:first-child{color:var(--cream);font-weight:600;width:38%}
+
+.send-float{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;font-size:17px;padding:14px 20px;box-shadow:4px 5px 0 var(--ink),0 0 24px #ff4f9a88}
+.send-float .badge{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:99px;min-width:28px;padding:3px 7px;font-size:14px;text-align:center}
+.share-big{justify-content:center;font-size:18px;padding:16px 20px}
+@media (max-width:520px){.send-float{left:16px;right:16px;justify-content:center}}
+footer{margin-top:80px;border-top:2px dashed #ffffff26;padding-bottom:70px}
+footer .wrap{padding-block:24px;display:flex;gap:10px 24px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+
+dialog{border:3px solid var(--ink);border-radius:var(--r);background:var(--wall);color:var(--text);padding:14px;box-shadow:8px 9px 0 var(--ink);max-width:min(94vw,980px)}
+dialog::backdrop{background:#0b0716d9}
+dialog .dlg-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+dialog video,dialog img{max-height:78vh;width:auto;max-width:100%;margin:0 auto;border-radius:10px;background:#000}
+
+@media (max-width:980px){
+  .room,.map-wrap,.world-top,.e00-player{grid-template-columns:1fr}
+  .composer{position:static}
+  .chain{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cycle{grid-template-columns:1fr}
+  .phase:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-16px}
+}
+@media (max-width:720px){
+  .altimeter{grid-template-columns:1fr}
+  .band-label{border-right:0;text-align:left;padding:8px 0 10px;border-bottom:4px dashed #ffffff30}
+  .band-label::after{display:none}
+  .band-row{padding:16px 0 26px}
+  .nav nav{display:none}
+  .chain{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}.card,.note{transform:none!important}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <img src="media/titulo-a-humo.webp" alt="UNAKÉ" width="80" height="34">
+    <nav aria-label="Secciones">
+      <a href="#mundo">El mundo</a><a href="#reparto">Reparto</a><a href="#capitulos">Capítulos</a><a href="#making">Making-of</a><a href="#aporta">Tu aportación</a>
+    </nav>
+    <a class="btn hot notes-pill" href="#aporta" id="notes-pill"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span id="notes-total">Tu aportación</span></a>
+  </div>
+</header>
+
+<main>
+  <!-- ======================= HERO ======================= -->
+  <section class="hero" style="padding:0" aria-label="UNAKÉ">
+    <video src="media/hero-loop.mp4" poster="media/still-intro-sofa.webp" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="wrap">
+      <span class="eyebrow">Una serie de animación de VOPPË · en construcción</span>
+      <img class="logo" src="media/titulo-a-humo.webp" alt="UNAKÉ" width="1000" height="429">
+      <div class="loop" aria-label="El bucle de la contraseña"><p class="bubble">¿Vamos a Unaké?</p><p class="bubble">¿A una qué?</p><p class="bubble">A una aso.</p></div>
+      <p class="lead">En el mundo humo, cada sensación de fumar es alguien que vive dentro de ella, y todos acaban en Unaké, la aso de los hermanos Aso. La estamos haciendo y queremos tu opinión: trastea, escucha las voces, mira los capítulos y el making-of, marca lo que te guste y déjanos tus ideas. Al final te preparamos un resumen para que nos lo mandes.</p>
+      <div class="ctas"><a class="btn hot" href="#reparto">Empezar por el reparto</a><button class="btn" type="button" id="play-intro">Ver el intro con sonido</button><a class="btn" href="#aporta">Tu aportación</a></div>
+      <p class="small muted"><span class="pill canon">Canon</span> decidido · <span class="pill prop">Propuesta</span> por aprobar · <span class="pill seed">Semilla</span> idea de capítulo · <span class="pill pend">Pendiente</span> sin decidir</p>
+    </div>
+  </section>
+
+  <!-- ======================= THE WORLD ======================= -->
+  <section id="mundo"><div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">El mundo humo</span>
+      <h2>Personas dentro de su estado</h2>
+      <p class="lead">Todo son nubes, humo y neones. Cada personaje es una sensación de fumar, pero ninguno es un concepto: son personas que viven dentro de su estado. El deseo lo pone la persona; el estado decide cómo le sale. Humor gamberro, medio obsceno y escatológico, y cercano: el cliente de VOPPË se tiene que reconocer en cada uno.</p>
+    </div>
+    <div class="world-top">
+      <article class="drawn" data-item="unake">
+        <h3>Unaké, la aso de los hermanos Aso</h3>
+        <p>Palicaso y Blancaso son los hermanos Aso y tienen una aso: Unaké. El juego de palabras es la contraseña para entrar, y si se quiere enrevesar, en bucle:</p>
+        <div class="dialog-loop small"><p><b>—¿Vamos a Unaké?</b> —¿A una qué? —A una aso. —¿De quién? —De los hermanos Aso, Palicaso y Blancaso, que tienen Unaké. —¿Una qué?…</p></div>
+        <p class="small muted">Unaké es el spot, y también un sitio de trabajo, como el bar de <i>Cheers</i>: cada uno tiene su puesto.</p>
+        <p><span class="pill canon">Canon</span> el nombre, el bucle y los puestos <span class="pill prop">Propuesta</span> que sea la contraseña</p>
+        <span class="anota" data-for="unake"></span>
+      </article>
+      <article class="drawn" data-item="filosofia">
+        <span class="eyebrow">La filosofía</span>
+        <p class="motto">Dulce, salado y un spot.</p>
+        <p class="muted">La felicidad, según el mundo humo. Unaké es el spot; Monchiman lleva los otros dos en la mochila.</p>
+        <p><span class="pill canon">Canon</span> la filosofía <span class="pill prop">Propuesta</span> como lema de la serie</p>
+        <span class="anota" data-for="filosofia"></span>
+      </article>
+    </div>
+    <div class="signs" id="reglas" aria-label="Las reglas del mundo humo"></div>
+    <div class="cycle" data-item="ciclo">
+      <article class="drawn phase"><span class="n">1</span><h4>Subidón</h4><p>Palicaso, el palique · Lasslow, la risa floja · Perico, el cotorreo</p></article>
+      <article class="drawn phase"><span class="n">2</span><h4>Hambre</h4><p>Cotine, los monchis</p></article>
+      <article class="drawn phase"><span class="n">3</span><h4>Techo</h4><p>La Pompa: hasta aquí. Si te pasas… ¡plop!</p></article>
+      <article class="drawn phase"><span class="n">4</span><h4>Amarillo</h4><p>Blancaso, el lado malo. Si va a más, Puky viene de camino</p></article>
+      <article class="drawn phase"><span class="n">5</span><h4>Rescate</h4><p>Monchiman: dulce, salado y un resucitador. Y vuelta al spot</p></article>
+    </div>
+    <p class="small muted" style="margin-top:14px;max-width:80ch"><span class="pill prop">Propuesta</span> El ciclo del humo es el mapa de una sesión, y cada fase es la casa de alguien. Los hermanos Aso son los dos extremos del mismo viaje: el mismo humo te da palique o blancazo. Monchiman tiene que llegar antes que Puky. <span class="anota" data-for="ciclo"></span></p>
+  </div></section>
+
+  <!-- ======================= THE CAST ======================= -->
+  <section id="reparto"><div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">El reparto</span>
+      <h2>La altura es el estado</h2>
+      <p class="lead">El subidón vive arriba y el bajón abajo, como dicen las palabras. Cada uno se mueve como su materia (lo que es gas flota, lo que es nieve cae, lo que es líquido repta) y la pata la pone la especie. Por eso el reparto se ordena del techo al suelo. Las voces que se oyen son las notas de voz de maqueta que ya habéis grabado.</p>
+    </div>
+    <div class="altimeter" id="altimeter"></div>
+  </div></section>
+
+  <!-- ======================= CHAPTERS ======================= -->
+  <section id="capitulos"><div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Los capítulos</span>
+      <h2>Capítulos por hacer</h2>
+      <p class="lead">Cortos de 30 a 75 segundos en vertical y horizontal. Cada capítulo coge un estado y le da la vuelta, y tiene su momento persona: a alguien se le limpian los ojos. Marca las que te gustaría ver y déjanos ideas sobre cualquiera: las semillas son capítulos que aún no están escritos.</p>
+    </div>
+    <div class="cork">
+      <h3>Escritos y aprobados</h3>
+      <div class="cards" id="eps"></div>
+      <div class="e00-player">
+        <div class="drawn" style="padding:20px;display:grid;gap:10px" data-item="e00-animatica">
+          <span class="eyebrow">Ya animado, como prueba</span>
+          <h3>El E00, en animática</h3>
+          <p class="small">El guion montado con lo que hay: la entrada con el bucle, el intro y, dentro, una conversación hecha con vuestras notas de voz enteras. Blancaso se muere (como todas las noches), la Pompa llega tarde a todo, Lasslow se hace pasar por nuevo en la ciudad y su carcajada acaba en pedo. Y Puky después de los créditos.</p>
+          <p><span class="pill prop">Propuesta</span> <span class="small muted">2 min · lo no grabado balbucea</span></p>
+          <span class="anota" data-for="e00-animatica"></span>
+        </div>
+        <video src="media/e00.mp4" poster="media/still-e00-bar.webp" controls playsinline preload="none"></video>
+      </div>
+      <h3>Semillas: qué escribir después</h3>
+      <div class="cards" id="seeds"></div>
+      <h3>Personajes candidatos</h3>
+      <div class="cards" id="cands"></div>
+      <div class="formula drawn" style="margin-top:34px;padding:20px 24px;display:grid;gap:10px" data-item="formula">
+        <h3>La fórmula de un capítulo <span class="pill prop">Propuesta</span></h3>
+        <p class="small">Entrada con la contraseña (opcional) · la persona quiere algo · un estado se desequilibra y pasa a su cara mala (muchas veces la lía Lasslow) · crisis: alguien se pasa y Puky viene de camino · salida: Monchiman (nadie ata cabos) u otro estado le da la vuelta · momento persona · el estado se queda el último chiste. No todos necesitan a Monchiman: alternar capítulos de barra y de rescate.</p>
+        <span class="anota" data-for="formula"></span>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ======================= MAKING-OF ======================= -->
+  <section id="making"><div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Making-of</span>
+      <h2>De un dibujo a un personaje que se mueve</h2>
+      <p class="lead">Todo lo que se ve se ha hecho con planes gratuitos de IA y un motor de animación propio. Así nace Cotine, el personaje con el kit más completo:</p>
+    </div>
+    <div class="chain" data-item="kits">
+      <div class="step"><figure><img src="media/orig-cotine.webp" alt="Cotine, dibujo original de Mixboard" loading="lazy"></figure><span class="k">1</span><p><b>El original.</b> El diseño de partida, hecho en Mixboard.</p></div>
+      <div class="step"><figure><img src="media/modelo-cotine.webp" alt="Hoja de modelo de Cotine" loading="lazy"></figure><span class="k">2</span><p><b>La hoja de modelo.</b> Frente, tres cuartos, perfil y espalda, con ChatGPT: la referencia única.</p></div>
+      <div class="step"><figure><img src="media/cotine-bocas.webp" alt="Hoja de bocas de Cotine" loading="lazy"></figure><span class="k">3</span><p><b>Las piezas.</b> Ojos, bocas y brazos sobre verde croma, con Gemini.</p></div>
+      <div class="step"><figure><img src="media/cotine-revision.webp" alt="Kit de Cotine recortado" loading="lazy"></figure><span class="k">4</span><p><b>El kit.</b> Una herramienta propia quita el verde y separa las 30 piezas.</p></div>
+      <div class="step"><figure><img src="media/still-cotine.webp" alt="Cotine animada mordiéndose" loading="lazy"></figure><span class="k">5</span><p><b>En movimiento.</b> El motor monta las piezas, las anima y saca el vídeo en los dos formatos.</p></div>
+    </div>
+    <p style="margin-top:14px"><span class="anota" data-for="kits"></span></p>
+    <div class="gal-tabs" role="tablist" aria-label="Galería del making-of" id="gal-tabs"></div>
+    <div class="gallery" id="gallery" role="tabpanel"></div>
+    <ol class="pipeline" data-item="proceso">
+      <li class="drawn"><b>Guion</b><span>Aprobado, con su desglose de piezas</span></li>
+      <li class="drawn"><b>Generar lo que falta</b><span>Gemini y ChatGPT, gratis, sobre verde croma</span></li>
+      <li class="drawn"><b>Recortar</b><span>Se quita el verde y se separan las piezas</span></li>
+      <li class="drawn"><b>Rig</b><span>Cada personaje, listo para el motor</span></li>
+      <li class="drawn"><b>Voces</b><span>Notas de voz, transcritas en local con Whisper</span></li>
+      <li class="drawn"><b>Animar</b><span>El motor monta planos, cámara, humo y sonido</span></li>
+      <li class="drawn"><b>Revisar y renderizar</b><span>Fotogramas sueltos primero; vídeo 16:9 y 9:16 al final</span></li>
+    </ol>
+    <div class="drawn lesson" data-item="proceso">
+      <h4>Lo aprendido con el E00</h4>
+      <p class="small">En animación la voz va primero y la animación se ajusta a ella, como en <i>Los Simpson</i> o Pixar. El E00 v1 se animó antes de saber qué decían las notas de voz, y salió con acciones sueltas. En la v2 las frases grabadas son la columna de la conversación. La próxima herramienta es un guion con formato que genere la hoja de doblaje por personaje y el esqueleto de la animática.</p>
+      <span class="anota" data-for="proceso"></span>
+    </div>
+  </div></section>
+
+
+  <!-- ======================= YOUR CONTRIBUTION ======================= -->
+  <section id="aporta"><div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Tu aportación</span>
+      <h2>Cuéntanos qué te parece</h2>
+      <p class="lead">Todo lo que marques y escribas en la página se va juntando aquí. Contesta lo que quieras, deja las ideas que se te ocurran y, cuando acabes, envíanos el resumen. No se guarda en ningún servidor: vive en tu navegador hasta que lo mandas.</p>
+    </div>
+    <div class="room">
+      <form class="drawn composer" id="preguntas" autocomplete="off" onsubmit="return false">
+        <h3>Unas preguntas</h3>
+        <div id="q-list" style="display:grid;gap:14px"></div>
+      </form>
+      <div class="drawn" style="padding:20px;display:grid;gap:12px;align-content:start">
+        <h3 id="sum-title">Tu resumen</h3>
+        <p class="small muted" id="sum-hint"></p>
+        <div id="sum-view" style="display:grid;gap:10px"></div>
+        <label class="eyebrow" for="sum-text" style="margin-top:6px">El texto que nos llega</label>
+        <textarea id="sum-text" readonly style="width:100%;min-height:220px;border:3px solid var(--ink);border-radius:12px;padding:12px;background:#fbf6ea;color:#231a2e;font:14px/1.45 var(--body)"></textarea>
+        <div class="ctas" style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn hot share-big" type="button" id="send-open">Enviar mi informe</button>
+          <button class="btn" type="button" id="change-name">Cambiar de nombre</button>
+        </div>
+        <p class="status-line" id="sum-status" role="status"></p>
+        <p class="small muted">WhatsApp se abre con el texto listo; eliges a quién mandarlo (a quien te pasó el enlace). Si no se abre, copia el resumen y pégalo en un mensaje.</p>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <span>UNAKÉ · una serie de VOPPË</span><span>Versión para asomarse · 24/09/2026</span>
+  <span>Nada de lo que escribas sale de tu navegador hasta que nos lo envías.</span>
+</div></footer>
+
+<dialog id="viewer" aria-labelledby="viewer-title">
+  <div class="dlg-head"><h3 id="viewer-title"></h3><button class="btn" type="button" id="viewer-close">Cerrar</button></div>
+  <div id="viewer-body"></div>
+</dialog>
+
+
+<dialog id="welcome" aria-labelledby="welcome-title">
+  <form id="welcome-form" style="display:grid;gap:14px;max-width:520px" autocomplete="off">
+    <img src="media/titulo-a-humo.webp" alt="UNAKÉ" style="width:260px;max-width:100%;margin:0">
+    <h3 id="welcome-title">Pasa, que es una aso</h3>
+    <p class="small">Esto es UNAKÉ, una serie de animación que estamos haciendo. Trastea todo lo que quieras: escucha las voces, mira los capítulos y el making-of. En cada cosa puedes marcar <b>Me gusta</b> y <b>Dejar una idea</b>, y abajo del todo hay unas preguntas. Al final te preparamos un resumen para que nos lo envíes.</p>
+    <label class="eyebrow" for="w-name">¿Cómo te llamas?</label>
+    <input id="w-name" required maxlength="60" placeholder="Tu nombre" style="border:3px solid var(--ink);border-radius:12px;padding:12px;background:#fbf6ea;color:#231a2e;font-size:17px">
+    <label class="eyebrow" for="w-role">¿De qué nos conoces?</label>
+    <select id="w-role" style="border:3px solid var(--ink);border-radius:12px;padding:11px;background:var(--wall-2);color:var(--text)">
+      <option value="">Prefiero no decirlo</option><option>Soy del equipo</option><option>Amigo o amiga</option><option>Cliente de VOPPË</option><option>Me han pasado el enlace</option>
+    </select>
+    <p class="status-line" id="w-status" role="status"></p>
+    <button class="btn hot" type="submit" style="justify-self:start">Entrar a Unaké</button>
+  </form>
+</dialog>
+
+<dialog id="idea" aria-labelledby="idea-title">
+  <form id="idea-form" style="display:grid;gap:12px;width:min(560px,86vw)" autocomplete="off">
+    <span class="eyebrow">Tu idea sobre</span>
+    <h3 id="idea-title"></h3>
+    <textarea id="idea-text" maxlength="1500" placeholder="Lo que quieras: qué te gusta, qué cambiarías, una historia que se te ocurra…" style="width:100%;min-height:140px;border:3px solid var(--ink);border-radius:12px;padding:12px;background:#fbf6ea;color:#231a2e;font-size:16px;line-height:1.45"></textarea>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn hot" type="submit">Guardar la idea</button>
+      <button class="btn" type="button" id="idea-cancel">Cancelar</button>
+      <button class="btn" type="button" id="idea-delete">Borrar</button>
+    </div>
+  </form>
+</dialog>
+
+<button class="btn hot send-float" type="button" id="float-aporte"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg><span id="float-label">Enviar mi informe</span><span class="badge" id="float-count">0</span></button>
+
+<dialog id="share" aria-labelledby="share-title">
+  <div style="display:grid;gap:14px;width:min(560px,86vw)">
+    <div class="dlg-head"><h3 id="share-title">Envía tu informe</h3><button class="btn" type="button" id="share-close">Cerrar</button></div>
+    <p class="small" id="share-sum"></p>
+    <a class="btn hot share-big" id="share-wa" href="#" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.6-.3z"/></svg>Enviar por WhatsApp</a>
+    <button class="btn hot share-big" type="button" id="share-native" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Compartir con otra app</button>
+    <button class="btn share-big" type="button" id="share-copy"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span id="share-copy-label">Copiar para pegarlo donde quieras</span></button>
+    <p class="small muted">WhatsApp se abre con el informe escrito: elige a quién te pasó el enlace y dale a enviar. Si no se abre, usa «Copiar» y pégalo en un mensaje.</p>
+    <details class="small"><summary style="cursor:pointer;color:var(--muted)">Ver el texto que se envía</summary><textarea id="share-text" readonly style="width:100%;min-height:200px;margin-top:8px;border:3px solid var(--ink);border-radius:12px;padding:10px;background:#fbf6ea;color:#231a2e;font:13px/1.45 var(--body)"></textarea></details>
+  </div>
+</dialog>
+
+<script>
+/* ================================================================ DATA ================================================================ */
+const COL = {vuper:['#b7c6de','#2f3a52'], monchiman:['#ff5a48','#5a1a1a'], palicaso:['#ffd64a','#5a4312'], blancaso:['#d7f0ff','#2c3f55'], perico:['#7eeb72','#1f4a24'],
+  cotine:['#ff7fb0','#5a2140'], 'la-pompa':['#8cebff','#1e4a63'], lasslow:['#ffb28c','#5a3222'], puky:['#ece246','#4f4a12']};
+const CHARS = [
+ {id:'la-pompa', band:'techo', name:'La Pompa', sense:'El techo', img:'la-pompa', say:'Yo no, que exploto.', clip:'la-pompa',
+  who:'Pincha la música desde el techo y lo ve todo desde arriba. Es ella.', wants:'Quietud.', sab:'Cualquier soplido la mueve, y llega tarde a todo.',
+  moves:'Flota a la deriva, tiembla como una pompa y vive pegada al techo: es el techo, literal.', faces:'Buena: la paz absoluta · Mala: desconectarse justo cuando había que estar.',
+  voices:[['pompa-buena-gente','«Tío, pues está de puta madre aquí, la verdad, tronco. No sabía yo que había tanta buena gente por aquí.»']]},
+ {id:'palicaso', band:'alto', name:'Palicaso', sense:'El palique', img:'palicaso', say:'¡Escucha, escucha!', clip:'palicaso',
+  who:'Dueño y camarero de Unaké, el alma de la fiesta. Hermano de Blancaso.', wants:'Que alguien le escuche de verdad.', sab:'Habla tanto que nunca deja hueco para que le escuchen.',
+  moves:'Vuela como un cohete con su estela, en zigzag. Es rígido: una estrella no se deforma.', faces:'Buena: la mejor conversación de tu vida · Mala: no te deja irte a dormir.', voices:[]},
+ {id:'perico', band:'alto', name:'Perico', sense:'El cotorreo', img:'perico', say:'¡Pin pin!', clip:'perico',
+  who:'El portero y el que se entera de todo en el barrio. Le llaman Periquito, y cada vez silba «¡pin pin!» (canon; el doble sentido es buscado).', wants:'Que le tomen en serio.', sab:'Es un pájaro: repite, silba y se lleva cosas, y nadie le cree.',
+  moves:'A saltitos con su pata, vuelos cortos, animado a golpes. Vive alto: en su percha o en la mirilla.', faces:'Buena: el colega con el que te ríes de todo · Mala: el chivato.', voices:[]},
+ {id:'monchiman', band:'alto', name:'Monchiman', sense:'El rescate', img:'monchiman', say:'¡Que no cunda el amarillo!', clip:'vuper',
+  who:'Vuper con la máscara: el único que aparece cuando a alguien le da un amarillo. Nadie ata cabos.', wants:'Llegar antes que Puky.', sab:'Como Monchiman le ven todos, pero no a él.',
+  moves:'Vuela en línea recta dejando estela y llega en picado desde arriba: con la máscara «tiene tiro». No te sube: te coloca donde te toca.', faces:'Buena: que alguien te cuide · Mala: Monchiman el pesado, que rescata a quien no lo necesitaba.', voices:[],
+  extra:'Sus inventos salen de su cuarto y pueden acabar siendo productos de VOPPË impresos en 3D (canon).'},
+ {id:'vuper', band:'medio', name:'Vuper', sense:'El protagonista', img:'vuper', say:'Vale, vale…', clip:'vuper',
+  who:'La mascota de VOPPË. Rider de monchis: reparte de noche y nadie se fija en el repartidor. Pasa por todas las fases: es el espectador dentro de la serie.', wants:'Que le vean.', sab:'Como Vuper no le ve nadie.',
+  moves:'Flota a ras, tranquilo, y respira despacio. Se hace las manos de su propia nube.', faces:'La M de neón de su cuarto se enciende cuando alguien pilla un amarillo.', voices:[]},
+ {id:'cotine', band:'medio', name:'Cotine', sense:'El hambre', img:'cotine', say:'¿Qué? Tenía hambre.', clip:'cotine',
+  who:'La repostera de Unaké. Es ella.', wants:'Servir, por una vez, un postre entero.', sab:'Se come lo que cocina antes de servirlo.',
+  moves:'A saltitos sobre su palo, que es su pata y su freno. Fumar la hincha, y se regula comiéndose.', faces:'Buena: el festín · Mala: el antojo imposible a las cuatro de la mañana.', voices:[]},
+ {id:'lasslow', band:'bajo', name:'Lasslow', sense:'La risa floja', img:'lasslow', say:'¡Que se me ha escapao!', clip:'lasslow',
+  who:'Cliente de toda la vida; se cree un caballero, con pajarita. Su risa y su «¡que se me ha escapao!» son canon.', wants:'Que le tomen por un señor.', sab:'La risa floja y el pedo le delatan en el peor momento.',
+  moves:'A pasitos con sus piececillos. Para ir rápido, pedo-propulsión. Vive bajo.', faces:'Buena: llorar de risa con los tuyos · Mala: la risa en el peor momento.',
+  voices:[['lasslow-risa','Su risa'],['lasslow-escapao','«¡Que se me ha escapao!»'],['lasslow-chavales','«¿Qué pasa, chavales?»… «¿sabéis dónde pillar? Que estoy por aquí nuevo en la ciudad.»']]},
+ {id:'blancaso', band:'bajo', name:'Blancaso', sense:'El amarillo', img:'blancaso', say:'Otra vez no…', clip:'blancaso',
+  who:'El otro hermano Aso: lleva las cuentas, los papeles y todo lo que se rompe. Es el que sostiene Unaké.', wants:'Disfrutar de su propio bar una noche.', sab:'Cada vez que lo intenta, le da el bajón.',
+  moves:'Cae balanceándose como un copo y siempre acaba en el sofá. Es rígido, un cristal, y se derrite por los bordes.', faces:'Buena (canon): la noche épica, que nadie olvida · Mala: el malestar.',
+  voices:[['blancaso-ambulancia','«Llamad una ambulancia, hermano, que me estoy muriendo.» «¿No tendrás un cigarro por ahí?» «Joder, que nadie da nada en esta sociedad…»']]},
+ {id:'puky', band:'suelo', name:'Puky', sense:'La pota', img:'puky', say:'¿Me llamabais?', clip:'puky',
+  who:'El mejor amigo de Blancaso y el único sin contraseña: nunca le invitan y entra por debajo de la puerta. ¿Él o ella? Pendiente.', wants:'Que le inviten.', sab:'Siempre aparece cuando nadie quiere que aparezca.',
+  moves:'Repta, se estira, se pega y deja rastro. Es el reloj de los rescates: si el amarillo va a más, Puky viene de camino.', faces:'Buena: el alivio de después · Mala: lo evidente.',
+  voices:[['puky-risita','Su risita'],['puky-no','«¡No!», triste']]},
+];
+const BANDS = [['techo','Techo','hasta aquí'],['alto','Alto','el subidón'],['medio','Medio','a su ritmo'],['bajo','Bajo','el bajón'],['suelo','Suelo','a ras']];
+const EPS = [
+ {id:'e00', code:'E00', title:'La contraseña', st:'canon', cast:['vuper','cotine','perico','palicaso','lasslow','blancaso','la-pompa'],
+  text:'Vuper se mete sin querer en el bucle de la contraseña y Cotine le saca a su manera. Dentro está todo el reparto, y en el cuarto de Vuper algo se enciende.', persona:'Presentación de todos · animática hecha'},
+ {id:'e01', code:'E01', title:'Antes que Puky', st:'canon', cast:['blancaso','palicaso','lasslow','vuper','monchiman','puky','perico'],
+  text:'Blancaso tiene apuntado en la agenda que esta noche se lo va a pasar bien, y le da un amarillo. Puky ya viene de camino. Monchiman tiene que llegar antes, y en la puerta le espera la contraseña.', persona:'«Quédate, Puky. Pero ahí, en el suelo.»'},
+ {id:'e02', code:'E02', title:'Breathe and float', st:'canon', cast:['lasslow','la-pompa','palicaso','cotine','blancaso'],
+  text:'Lasslow se ha puesto pajarita: esta noche se declara a la Pompa. Pero ella vive en el techo, él no levanta un palmo del suelo, y solo hay una forma de subir que un caballero no usaría jamás.', persona:'La Pompa: «Qué detalle.»'},
+ {id:'e03', code:'E03', title:'El palo', st:'canon', cast:['cotine','perico','palicaso','la-pompa','monchiman','blancaso','lasslow'],
+  text:'Cotine ha hecho una tarta para animar a Blancaso y se ha prometido no probarla. Perico le quita el palo para usarlo de percha, y sin palo Cotine no puede ni andar ni frenarse.', persona:'Cotine: «Para ti. Entera.»'},
+];
+const SEEDS = [
+ {id:'plop', title:'Plop', cast:['la-pompa','palicaso','cotine'], text:'Palicaso invita a otra ronda y la Pompa, por una vez, no sabe decir que no. O Cotine se hincha y la aprieta contra el techo. Revienta: el ciclo del humo entero en un capítulo.'},
+ {id:'perico-lo-sabe', title:'Perico lo sabe', cast:['perico','vuper','monchiman'], text:'Perico se pasa el capítulo gritando que Vuper es Monchiman. Nadie hace caso a un pájaro, y para callarle le llaman «periquito»: pin pin.'},
+ {id:'mejor-amigo', title:'El mejor amigo', cast:['puky','blancaso'], text:'Por qué Puky es el mejor amigo de Blancaso: es el único que aparece siempre que todo sale mal.'},
+ {id:'noche-epica', title:'La noche épica', cast:['blancaso','palicaso','lasslow'], text:'La noche que Blancaso estuvo de Blancaso se ha vuelto leyenda en Unaké, y cada uno la cuenta a su manera.'},
+ {id:'monchiman-pesado', title:'Monchiman, el pesado', cast:['monchiman','vuper'], text:'Rescata a todo el que ve, lo necesite o no, y le corta el rollo a Unaké entero. Hasta que le toca a él.'},
+ {id:'resucitador', title:'El resucitador', cast:['monchiman'], text:'En mitad de un rescate se queda sin resucitadores y tiene que improvisar con la máquina expendedora de Unaké.'},
+ {id:'una-que', title:'Una qué', cast:['palicaso','blancaso'], text:'El origen de Unaké: el funcionario del registro de asociaciones pregunta «¿una qué?», y así se queda el nombre.'},
+ {id:'senal-amarilla', title:'La señal amarilla', cast:['vuper','monchiman'], text:'El origen de Monchiman: el primer amarillo de Vuper, solo, en una fiesta. Nadie le ayudó; algo dulce le salvó.'},
+ {id:'te-estan-mirando', title:'Te están mirando', cast:['lasslow'], text:'La paranoia (El Mirón) entra en Unaké y todos sospechan de todos. Lasslow se ríe y el que está rayado cree que se ríen de él.'},
+ {id:'mechero', title:'¿Quién tiene mi mechero?', cast:['perico','monchiman'], text:'Desaparecen los mecheros de Unaké y el ladrón está dentro: Perico, que se los lleva a su percha. Monchiman lleva uno en la mochila, y es de VOPPË.'},
+];
+const CANDS = [
+ {id:'miron', title:'El Mirón', text:'La paranoia: una nube oscura cubierta de ojos que parpadean a destiempo. Solo le calma el neón de Unaké. El malestar de la cabeza, como Blancaso es el del cuerpo.'},
+ {id:'niebla', title:'Niebla', text:'La empanada, el olvido. En cortos de 30 s, alguien que pregunta «¿qué ha pasado?» hace el resumen sin que se note.'},
+ {id:'sofas', title:'Los sofás de Unaké', text:'La modorra: quien se sienta ya no se levanta. Casi gratis, porque ya están en el fondo. Y el gag del sofá del intro puede ser fijo.'},
+];
+const RULES = [
+ ['r-sensacion','Cada personaje es una sensación','Si uno nuevo no representa una sensación de fumar, no entra.','canon','#ff8fc0'],
+ ['r-personas','Personas, no conceptos','Cada uno es alguien que vive dentro de su estado.','canon','#8cebff'],
+ ['r-ningun-estado','Ningún estado es bueno ni malo','No hay villano fijo: cualquiera puede ser el antagonista, y hasta estar de Blancaso puede ser épico.','canon','#ffd64a'],
+ ['r-solo-cuerpo','Solo cuerpo','Nadie tiene cuerpo humanoide. Las patas las pone la especie: la pata de Perico, el palo de Cotine, los pies de Lasslow.','canon','#7eeb72'],
+ ['r-materia','Se mueven como su materia','Lo que es gas flota, lo que es nieve cae, lo que es líquido repta. Y la altura cuenta el estado.','canon','#8cebff'],
+ ['r-ojos','Los ojos son la persona','El rojo es el estado. Cuando alguien habla desde quien es, se le limpian los ojos: el momento persona.','canon','#ff8fc0'],
+ ['r-fumar-hincha','Fumar hincha','Hechos de humo, crecen con cada calada. El gas mueve cosas: un pedo de Lasslow le propulsa.','prop','#ffd64a'],
+ ['r-jerga','Jerga del nicho, nunca la marca','Nadie pide «un Monster»: pide «un mangoloco». Y las marcas propias, como la Locacola.','canon','#7eeb72'],
+ ['r-sustancia','Nunca se nombra la sustancia','Todo es humo.','prop','#b7c6de'],
+ ['r-nadie-juzga','Aquí nadie juzga','Lo dice un neón de Unaké. Nos reímos con Blancaso, nunca de él.','prop','#8cebff'],
+ ['r-asqueroso','Lo asqueroso se sugiere','El pedo se oye y se ve en la cara de los demás. Puky es un personaje, no una escena de vómito.','prop','#ff8fc0'],
+ ['r-forma','La forma sale de una expresión','Partirse el culo: un culo. Cotorrear: un periquito. Estar en tu burbuja: una pompa.','prop','#ffd64a'],
+];
+const QS = [
+ ['q-puky','Puky: ¿él o ella?','Y si os vale su imagen.'],
+ ['q-lasslow','Lasslow: ¿nombre final y persona?','Su frase de prueba habla de colega a colega y dice que es nuevo en la ciudad; su persona canon es un caballero de toda la vida. La animática prueba que se hace pasar por nuevo.'],
+ ['q-secreto','¿Quién sabe que Vuper es Monchiman?','En E01 lo sabe Perico, y nadie le cree.'],
+ ['q-palique','¿Palicaso viene de «palique»?',''],
+ ['q-manos','¿Vuper y Puky se hacen las manos de su materia?','Los guiones ya lo dan por hecho.'],
+ ['q-lema','¿«Dulce, salado y un spot» es el lema de la serie?',''],
+ ['q-cannabica','¿Unaké es abiertamente una asociación cannábica?','Lo abierto es más real; «bar secreto con contraseña» da menos problemas.'],
+ ['q-fumar','¿Se ve fumar o se estiliza?','Los guiones dicen «calada» y no enseñan qué se fuma.'],
+ ['q-idioma','Neones en inglés y diálogos en castellano, ¿buscado?','¿Y las erratas de los neones?'],
+ ['q-escatologico','¿Hasta dónde llega lo escatológico?','Propuesta: «Lo asqueroso se sugiere».'],
+ ['q-firma','¿La serie la firma VOPPË o la marca va escondida?',''],
+ ['q-productos','¿Qué productos vende VOPPË?','Se imprimen en 3D y los inventos de Monchiman pueden serlo; falta el catálogo.'],
+ ['q-abogado','Para el abogado','Ley 28/2005, marcas de terceros en jerga, la Locacola, que UNAKÉ esté libre y el «¿sabéis dónde pillar?».'],
+ ['q-formato','Formato','Duración por capítulo, plataformas y frecuencia.'],
+ ['q-voces','Voces','¿Las ponéis vosotros o con IA? Las de Lasslow, Blancaso, la Pompa y Puky ya tienen maqueta; falta el pin pin.'],
+ ['q-suno','La canción','¿Con qué plan de Suno se hizo (licencia)? ¿Se puede bajar en más calidad?'],
+ ['q-carpeta','¿Dónde vive la carpeta?','Recomendado: un repositorio Git con LFS, para tener historial.'],
+];
+const DECIDED = [
+ ['Título de la serie','UNAKÉ, con el bucle «¿una qué?» «una aso»'],['Título dibujado','El A, las letras de nube'],['Intro','La v2, tal cual: 28 s y el gag del sofá'],
+ ['Cotine y la Pompa','Las dos son ellas'],['Cuerpos','Solo cuerpo; las patas las pone la especie'],['Antagonista','No hay villano fijo'],
+ ['Estados o personajes','Personas dentro de su estado; los ojos son la persona'],['Perico','El doble sentido es buscado; se le llama Periquito'],
+ ['Guiones','E00 a E03 aprobados'],['Inventos de Monchiman','Pueden ser productos de VOPPË impresos en 3D'],['Locacola','La cola cutre del mundo humo'],
+ ['La risa de Lasslow','Grabada, con su «¡Que se me ha escapao!»'],
+];
+const GALLERY = {
+ 'Originales':[['orig-vuper','Vuper','El original de Mixboard, con los ojos rojos: hoy el rojo es un estado, no sus ojos'],['orig-palicaso','Palicaso',''],['orig-blancaso','Blancaso',''],['orig-perico','Perico',''],['orig-cotine','Cotine','Con un porro en la mano: ¿se ve fumar o se estiliza? (pendiente)'],['orig-la-pompa','La Pompa',''],['orig-lasslow','Lasslow','Imagen de WhatsApp']],
+ 'Hojas de modelo':[['modelo-cotine','Cotine','ChatGPT, la referencia de su kit'],['modelo-palicaso','Palicaso',''],['modelo-blancaso','Blancaso',''],['modelo-perico','Perico','Con los ojos naranjas y medio cerrados']],
+ 'Expresiones':[['expr-vuper','Vuper y Monchiman','Seis estados, tres con la máscara'],['expr-palicaso','Palicaso',''],['expr-blancaso','Blancaso',''],['expr-perico','Perico',''],['expr-la-pompa','La Pompa',''],['expr-lasslow','Lasslow',''],['expr-puky','Puky','La primera imagen de Puky (propuesta)'],['cotine-ojos','Cotine: ojos',''],['cotine-bocas','Cotine: bocas',''],['cotine-brazos','Cotine: brazos','']],
+ 'Escenarios':[['fondo-fuera','Unaké por fuera','Toca para apagar y encender el neón','fondo-fuera-off'],['fondo-dentro','Unaké por dentro',''],['fondo-sofa','El sofá de Unaké','Generado para el gag del sofá'],['fondo-techo','El techo','La casa de la Pompa'],['fondo-cuarto','El cuarto de Vuper','Toca para encender la M','fondo-cuarto-off'],['fondo-cielo','El cielo del barrio','']],
+ 'Objetos':[['obj-caramelo','El caramelo','Lo dulce'],['obj-bolsa-patatas','Las patatas','Lo salado'],['obj-lata-resucitador','El resucitador',''],['obj-mochila-rider','La mochila de rider',''],['obj-pajarita','La pajarita de Lasslow',''],['obj-agenda','La agenda de Blancaso','']],
+ 'Títulos':[['titulo-a-humo','A · Letras de nube','El elegido'],['titulo-b-setentero','B · Setentero','La alternativa']],
+ 'Referencias':[['ref-grupo-fuera','El grupo en la puerta',''],['ref-grupo-dentro','El grupo dentro',''],['ref-monchiman-cuarto','Monchiman en su cuarto','Con cuerpo humanoide: no es canon, vale como referencia del cuarto']],
+ 'Fotogramas':[['still-intro-barra','El intro: el amarillo',''],['still-intro-sofa','El intro: el gag del sofá',''],['still-e00-mirilla','E00: la bocanada por la mirilla',''],['still-e00-bar','E00: la conversación','']],
+};
+const OTHER_ITEMS = [
+ ['unake','Unaké y el bucle','mundo'],['filosofia','Dulce, salado y un spot','mundo'],['ciclo','El ciclo del humo','mundo'],['formula','La fórmula de capítulo','capitulos'],
+ ['e00-animatica','La animática del E00','capitulos'],['kits','Los kits de personajes','making'],['proceso','Cómo se hace','making'],
+ ['m-titulo','El título','making'],['m-intro','El intro','mundo'],['m-inventos','Los inventos de Monchiman','reparto'],['m-locacola','La Locacola y las marcas propias','mundo'],['m-sonidos','Los sonidos como firma','reparto'],['m-sofa','El gag del sofá','capitulos'],
+];
+const TYPES = [['trama','Trama','--t-trama'],['personaje','Personaje','--t-personaje'],['capitulo','Capítulo','--t-capitulo'],['arte','Arte','--t-arte'],['voz','Voz','--t-voz'],['marca','Marca','--t-marca'],['duda','Duda','--t-duda']];
+
+/* the items anything can connect to */
+const ITEMS = {};
+CHARS.forEach(c => ITEMS[c.id] = {label:c.name, sec:'reparto', kind:'personaje'});
+EPS.forEach(e => ITEMS[e.id] = {label:e.code + ' · ' + e.title, sec:'capitulos', kind:'capitulo'});
+SEEDS.forEach(s => ITEMS[s.id] = {label:'Semilla: ' + s.title, sec:'capitulos', kind:'semilla'});
+CANDS.forEach(s => ITEMS[s.id] = {label:'Candidato: ' + s.title, sec:'capitulos', kind:'candidato'});
+RULES.forEach(r => ITEMS[r[0]] = {label:'Regla: ' + r[1], sec:'mundo', kind:'regla'});
+QS.forEach(q => ITEMS[q[0]] = {label:'Pregunta: ' + q[1], sec:'falta', kind:'pregunta'});
+OTHER_ITEMS.forEach(o => ITEMS[o[0]] = {label:o[1], sec:o[2], kind:'otro'});
+
+/* ================================================================ HELPERS ================================================================ */
+const $ = (s, r = document) => r.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null || v === false) continue;
+    if (k === 'class') n.className = v; else if (k === 'text') n.textContent = v; else if (k === 'html') n.innerHTML = v;
+    else if (k.startsWith('on')) n.addEventListener(k.slice(2), v); else if (k === 'style') n.setAttribute('style', v); else n.setAttribute(k, v === true ? '' : v);
+  }
+  for (const k of kids.flat()) if (k != null) n.append(k.nodeType ? k : document.createTextNode(k));
+  return n;
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pill = st => el('span', {class:'pill ' + st, text:{canon:'Canon', prop:'Propuesta', seed:'Semilla', pend:'Pendiente'}[st]});
+const fmtDate = iso => { try { return new Date(iso).toLocaleDateString('es-ES', {day:'numeric', month:'short'}); } catch (e) { return ''; } };
+const PLAY = '<svg class="icon" viewBox="0 0 24 24" fill="#0b0716" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const PAUSE = '<svg class="icon" viewBox="0 0 24 24" fill="#0b0716" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+const anota = id => el('span', {class:'anota', 'data-for':id});
+
+/* ================================================================ STATIC RENDER ================================================================ */
+function renderRules() {
+  const box = $('#reglas');
+  RULES.forEach(([id, t, p, st, c]) => box.append(el('div', {class:'sign', 'data-item':id, style:'--c:' + c}, el('h4', {text:t}), el('p', {text:p}), el('div', {class:'row', style:'display:flex;gap:8px;flex-wrap:wrap;align-items:center'}, pill(st), anota(id)))));
+}
+let audio = null, audioBtn = null;
+function playVoice(btn, src) {
+  if (audio && audioBtn === btn) { if (audio.paused) { audio.play().catch(() => {}); btn.innerHTML = PAUSE; } else { audio.pause(); btn.innerHTML = PLAY; } return; }
+  if (audio) { audio.pause(); audioBtn.innerHTML = PLAY; audioBtn.nextElementSibling.querySelector('i').style.width = '0'; }
+  audio = new Audio('media/voz-' + src + '.mp3'); audioBtn = btn; btn.innerHTML = PAUSE;
+  const bar = btn.nextElementSibling.querySelector('i');
+  audio.addEventListener('timeupdate', () => { if (audio.duration) bar.style.width = (100 * audio.currentTime / audio.duration) + '%'; });
+  audio.addEventListener('ended', () => { btn.innerHTML = PLAY; bar.style.width = '0'; });
+  audio.play().catch(() => { btn.innerHTML = PLAY; });
+}
+function renderCast() {
+  const alt = $('#altimeter');
+  BANDS.forEach(([b, name, sub]) => {
+    const row = el('div', {class:'band-row'});
+    CHARS.filter(c => c.band === b).forEach(c => {
+      const [col, col2] = COL[c.id];
+      const voices = c.voices.length ? el('div', {class:'voices'}, el('dt', {text:'Su voz (maqueta)'}), c.voices.map(([src, label]) => {
+        const b2 = el('button', {type:'button', 'aria-label':'Escuchar: ' + label, html:PLAY}); b2.addEventListener('click', () => playVoice(b2, src));
+        return el('div', {class:'voice'}, b2, el('span', {}, label, el('i')));
+      })) : null;
+      row.append(el('article', {class:'drawn char', id:'p-' + c.id, 'data-item':c.id, style:`--c:${col};--c2:${col2}`},
+        el('div', {class:'stage'}, el('p', {class:'bubble', text:c.say}), el('img', {src:'media/' + c.img + '.webp', alt:c.name, loading:'lazy'})),
+        el('div', {class:'body'}, el('span', {class:'sense', text:c.sense}), el('h3', {text:c.name}),
+          el('dl', {}, el('dt', {text:'Quién es'}), el('dd', {text:c.who}), el('dt', {text:'Qué quiere'}), el('dd', {text:c.wants}), el('dt', {text:'Cómo se lo sabotea su estado'}), el('dd', {text:c.sab}),
+            el('dt', {text:'Cómo se mueve'}), el('dd', {text:c.moves}), el('dt', {text:'Sus dos caras'}), el('dd', {text:c.faces}), c.extra ? [el('dt', {text:'Y además'}), el('dd', {text:c.extra})] : null),
+          voices,
+          el('div', {class:'row'}, el('button', {class:'btn', type:'button', text:'Ver su clip', onclick:() => openVideo(c.name, 'media/clip-' + c.clip + '.mp4', 'media/clip-' + c.clip + '.jpg', true)}), anota(c.id)))));
+    });
+    alt.append(el('div', {class:'band'}, el('div', {class:'band-label'}, el('strong', {text:name}), el('span', {text:sub})), row));
+  });
+}
+const castImgs = ids => el('div', {class:'cast'}, ids.map(id => el('img', {src:'media/' + (CHARS.find(c => c.id === id) || {img:id}).img + '.webp', alt:ITEMS[id] ? ITEMS[id].label : id, title:ITEMS[id] ? ITEMS[id].label : id, loading:'lazy'})));
+function renderEpisodes() {
+  const eps = $('#eps');
+  EPS.forEach(e => eps.append(el('article', {class:'card', 'data-item':e.id, style:'--c:#ff9ec7'}, el('span', {class:'code', text:e.code}), el('h4', {text:e.title}), el('p', {text:e.text}),
+    el('p', {class:'persona', text:e.persona}), castImgs(e.cast), el('div', {style:'display:flex;gap:8px;flex-wrap:wrap;align-items:center'}, pill('canon'), el('span', {class:'small', style:'color:#5b4f63', text:'Aprobado'})), anota(e.id))));
+  const seeds = $('#seeds');
+  SEEDS.forEach(s => seeds.append(el('article', {class:'card', 'data-item':s.id, style:'--c:#c9b8ff'}, el('h4', {text:s.title}), el('p', {text:s.text}), castImgs(s.cast), pill('seed'), anota(s.id))));
+  const cands = $('#cands');
+  CANDS.forEach(s => cands.append(el('article', {class:'card', 'data-item':s.id, style:'--c:#ffd35a'}, el('h4', {text:s.title}), el('p', {text:s.text}), pill('prop'), anota(s.id))));
+}
+function renderGallery(tab) {
+  const tabs = $('#gal-tabs'), g = $('#gallery');
+  if (!tabs.childElementCount) Object.keys(GALLERY).forEach((k, i) => tabs.append(el('button', {type:'button', role:'tab', 'aria-selected':String(i === 0), text:k, onclick:() => renderGallery(k)})));
+  tab = tab || Object.keys(GALLERY)[0];
+  [...tabs.children].forEach(b => b.setAttribute('aria-selected', String(b.textContent === tab)));
+  g.replaceChildren(...GALLERY[tab].map(([src, t, cap, alt]) => {
+    const img = el('img', {src:'media/' + src + '.webp', alt:t, loading:'lazy'});
+    const box = el('div', {class:'img' + (alt ? ' switch' : '')}, img, alt ? el('span', {class:'hint', text:'Tocar: encender / apagar'}) : null);
+    if (alt) { let on = true; box.addEventListener('click', () => { on = !on; img.src = 'media/' + (on ? src : alt) + '.webp'; }); }
+    else box.addEventListener('click', () => openImage(t, 'media/' + src + '.webp'));
+    return el('figure', {}, box, el('figcaption', {}, el('b', {text:t}), cap ? ' · ' + cap : ''));
+  }));
+}
+
+/* ================================================================ VIEWER ================================================================ */
+const viewer = $('#viewer');
+function openDialog(title, node) {
+  $('#viewer-title').textContent = title; $('#viewer-body').replaceChildren(node);
+  if (typeof viewer.showModal === 'function') viewer.showModal(); else viewer.setAttribute('open', '');
+}
+function closeDialog() { const v = $('#viewer-body video'); if (v) v.pause(); if (viewer.open) { viewer.close ? viewer.close() : viewer.removeAttribute('open'); } }
+function openVideo(title, src, poster, vertical) {
+  const v = el('video', {src, poster, controls:true, playsinline:true, style:vertical ? 'aspect-ratio:9/16;max-height:78vh' : 'width:100%'});
+  openDialog(title, v); const p = v.play(); if (p && p.catch) p.catch(() => {});
+}
+function openImage(title, src) { openDialog(title, el('img', {src, alt:title})); }
+$('#viewer-close').addEventListener('click', closeDialog);
+viewer.addEventListener('click', e => { if (e.target === viewer) closeDialog(); });
+viewer.addEventListener('close', () => { const v = $('#viewer-body video'); if (v) v.pause(); });
+$('#play-intro').addEventListener('click', () => openVideo('El intro', 'media/intro.mp4', 'media/intro-poster.jpg', false));
+
+
+/* ================================================================ YOUR CONTRIBUTION ================================================================
+   No database: what a visitor marks and writes lives in their own browser (localStorage, as a draft) until they send the summary. */
+const KEY = 'unake-aporte-v1';
+const blank = () => ({n:'', r:'', likes:[], ideas:{}, resp:{}, t0:new Date().toISOString()});
+let A = blank();
+try { const s = localStorage.getItem(KEY); if (s) A = Object.assign(blank(), JSON.parse(s)); } catch (e) {}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(A)); } catch (e) {} renderChips(); renderSummary(); }
+
+const VQ = [
+ {id:'fav', q:'¿Qué personaje te ha gustado más?', kind:'select', opts:CHARS.map(c => c.name)},
+ {id:'ident', q:'¿Te ves reflejado en alguno? ¿En cuál y por qué?', kind:'text'},
+ {id:'primero', q:'¿Qué capítulo o semilla verías primero?', kind:'select', opts:[...EPS, ...SEEDS].map(e => ITEMS[e.id].label)},
+ {id:'gracia', q:'¿Qué te ha hecho más gracia?', kind:'text'},
+ {id:'frase', q:'¿Qué frase o sonido te llevarías (el pin pin, la risa de Lasslow…)?', kind:'text'},
+ {id:'lema', q:'«Dulce, salado y un spot» como lema de la serie:', kind:'radio', opts:['Me encanta', 'Está bien', 'No me convence']},
+ {id:'donde', q:'¿Dónde lo verías?', kind:'checks', opts:['TikTok', 'Instagram', 'YouTube', 'Otro sitio']},
+ {id:'lio', q:'¿Algo que no se entienda o no te encaje?', kind:'text'},
+ {id:'cambio', q:'¿Qué cambiarías?', kind:'text'},
+ {id:'libre', q:'Lo que quieras contarnos', kind:'text'},
+];
+function renderQuestions() {
+  const box = $('#q-list');
+  box.replaceChildren(...VQ.map(v => {
+    const id = 'vq-' + v.id; const cur = A.resp[v.id];
+    let input;
+    if (v.kind === 'text') { input = el('textarea', {id, maxlength:'1200', style:'width:100%;min-height:70px;border:3px solid var(--ink);border-radius:12px;padding:10px;background:#fbf6ea;color:#231a2e;font-size:15px'}); input.value = cur || ''; input.addEventListener('input', () => { A.resp[v.id] = input.value; saveSoon(); }); }
+    else if (v.kind === 'select') { input = el('select', {id, style:'width:100%;border:3px solid var(--ink);border-radius:12px;padding:10px;background:var(--wall-2);color:var(--text)'}, el('option', {value:'', text:'Elige…'}), v.opts.map(o => el('option', {value:o, selected:cur === o, text:o}))); input.addEventListener('change', () => { A.resp[v.id] = input.value; save(); }); }
+    else { const multi = v.kind === 'checks'; const vals = multi ? (cur || []) : cur;
+      input = el('div', {class:'types', role:'group', 'aria-label':v.q}, v.opts.map(o => el('button', {type:'button', style:'--tc:var(--t-capitulo)', 'aria-pressed':String(multi ? vals.includes(o) : vals === o), text:o, onclick:() => {
+        if (multi) { const s = new Set(A.resp[v.id] || []); s.has(o) ? s.delete(o) : s.add(o); A.resp[v.id] = [...s]; } else A.resp[v.id] = A.resp[v.id] === o ? '' : o;
+        save(); renderQuestions(); }}))); }
+    return el('div', {style:'display:grid;gap:6px'}, el('label', {for:id, class:'small', style:'font-weight:800;color:var(--cream)', text:v.q}), input);
+  }));
+}
+let soon = null; function saveSoon() { clearTimeout(soon); soon = setTimeout(save, 400); }
+
+/* the chips every idea carries: like it, leave an idea */
+function renderChips() {
+  document.querySelectorAll('.anota[data-for]').forEach(box => {
+    const id = box.dataset.for; const liked = A.likes.includes(id); const idea = A.ideas[id];
+    box.replaceChildren(
+      el('button', {type:'button', class:'vote', 'aria-pressed':String(liked), onclick:() => { A.likes = liked ? A.likes.filter(x => x !== id) : [...A.likes, id]; save(); }, text:liked ? 'Te gusta' : 'Me gusta'}),
+      el('button', {type:'button', class:idea ? 'count' : 'add', 'data-n':'1', onclick:() => openIdea(id), text:idea ? 'Tu idea · editar' : '+ Dejar idea'}));
+  });
+  const n = countAll(); $('#float-count').textContent = String(n); $('#notes-total').textContent = n ? 'Tu aportación · ' + n : 'Tu aportación';
+}
+const countAll = () => A.likes.length + Object.keys(A.ideas).length + Object.values(A.resp).filter(v => Array.isArray(v) ? v.length : String(v || '').trim()).length;
+
+/* the idea dialog */
+let ideaFor = null;
+function openIdea(id) { ideaFor = id; $('#idea-title').textContent = (ITEMS[id] || {label:id}).label; $('#idea-text').value = A.ideas[id] || ''; $('#idea-delete').hidden = !A.ideas[id]; showDlg($('#idea')); setTimeout(() => $('#idea-text').focus(), 50); }
+$('#idea-form').addEventListener('submit', e => { e.preventDefault(); const t = $('#idea-text').value.trim(); if (t) A.ideas[ideaFor] = t; else delete A.ideas[ideaFor]; save(); hideDlg($('#idea')); });
+$('#idea-cancel').addEventListener('click', () => hideDlg($('#idea')));
+$('#idea-delete').addEventListener('click', () => { delete A.ideas[ideaFor]; save(); hideDlg($('#idea')); });
+function showDlg(d) { if (typeof d.showModal === 'function') { if (!d.open) d.showModal(); } else d.setAttribute('open', ''); }
+function hideDlg(d) { if (d.open) { d.close ? d.close() : d.removeAttribute('open'); } }
+
+/* welcome: the name first */
+function welcome() { $('#w-name').value = A.n || ''; $('#w-role').value = A.r || ''; showDlg($('#welcome')); setTimeout(() => $('#w-name').focus(), 50); }
+$('#welcome-form').addEventListener('submit', e => { e.preventDefault(); const n = $('#w-name').value.trim(); if (!n) { $('#w-status').textContent = 'Dinos al menos tu nombre para saber de quién es cada idea.'; return; } A.n = n; A.r = $('#w-role').value; save(); hideDlg($('#welcome')); });
+$('#welcome').addEventListener('cancel', e => { if (!A.n) e.preventDefault(); });
+$('#change-name').addEventListener('click', welcome);
+
+/* the summary: readable for people, with a line at the end so Claude can import it into the team's room */
+function summaryText() {
+  const L = [];
+  const date = new Date().toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+  L.push(`UNAKÉ · aportación de ${A.n || 'alguien sin nombre'}${A.r ? ' (' + A.r + ')' : ''} · ${date}`, '');
+  const groups = {personaje:'Personajes', capitulo:'Capítulos', semilla:'Semillas', candidato:'Personajes candidatos', regla:'Reglas del mundo', otro:'Más cosas'};
+  if (A.likes.length) { L.push('LE GUSTA'); Object.entries(groups).forEach(([k, g]) => { const xs = A.likes.filter(id => (ITEMS[id] || {}).kind === k).map(id => ITEMS[id].label.replace(/^(Semilla|Candidato|Regla): /, '')); if (xs.length) L.push(`- ${g}: ${xs.join(', ')}`); }); L.push(''); }
+  const ideas = Object.entries(A.ideas); if (ideas.length) { L.push('SUS IDEAS'); ideas.forEach(([id, t]) => L.push(`- ${(ITEMS[id] || {label:id}).label}: «${t}»`)); L.push(''); }
+  const answered = VQ.filter(v => { const r = A.resp[v.id]; return Array.isArray(r) ? r.length : String(r || '').trim(); });
+  if (answered.length) { L.push('SUS RESPUESTAS'); answered.forEach(v => { const r = A.resp[v.id]; L.push(`- ${v.q} ${Array.isArray(r) ? r.join(', ') : r}`); }); L.push(''); }
+  if (!A.likes.length && !ideas.length && !answered.length) L.push('(Todavía no has marcado nada: trastea la página y vuelve aquí.)', '');
+  L.push('— Para Claude, no lo borres —', 'UNAKE-APORTE v1 ' + JSON.stringify({n:A.n, r:A.r, t:new Date().toISOString().slice(0, 10), gusta:A.likes, ideas:Object.keys(A.ideas), resp:VQ.filter(v => { const r = A.resp[v.id]; return Array.isArray(r) ? r.length : String(r || '').trim(); }).map(v => v.id)}));
+  return L.join('\n');
+}
+function renderSummary() {
+  const text = summaryText(); $('#sum-text').value = text;
+  const n = countAll();
+  $('#sum-title').textContent = A.n ? 'El resumen de ' + A.n : 'Tu resumen';
+  $('#sum-hint').textContent = n ? `Llevas ${n} ${n === 1 ? 'cosa' : 'cosas'}: ${A.likes.length} me gusta, ${Object.keys(A.ideas).length} ideas y ${countAll() - A.likes.length - Object.keys(A.ideas).length} respuestas.` : 'Marca «Me gusta» o deja ideas en lo que quieras de la página; aquí se va juntando todo.';
+  $('#sum-view').replaceChildren(...Object.entries(A.ideas).slice(-4).map(([id, t]) => el('div', {class:'note', style:'--tc:var(--t-trama);transform:none'}, el('b', {class:'tipo', text:(ITEMS[id] || {label:id}).label}), el('p', {class:'txt', text:t}))));
+  $('#share-wa').href = 'https://wa.me/?text=' + encodeURIComponent(text);
+  $('#share-text').value = text;
+  const ni = Object.keys(A.ideas).length, na = countAll() - A.likes.length - ni;
+  $('#share-sum').textContent = n ? `${A.n || 'Tu'} informe lleva ${A.likes.length} me gusta, ${ni} ${ni === 1 ? 'idea' : 'ideas'} y ${na} ${na === 1 ? 'respuesta' : 'respuestas'}.` : 'Aún no has marcado nada. Puedes enviarlo igual o seguir trasteando y volver luego.';
+}
+function openShare() { if (!A.n) { welcome(); return; } renderSummary(); $('#share-copy-label').textContent = 'Copiar para pegarlo donde quieras'; showDlg($('#share')); }
+$('#float-aporte').addEventListener('click', openShare);
+$('#send-open').addEventListener('click', openShare);
+$('#share-close').addEventListener('click', () => hideDlg($('#share')));
+if (navigator.share) {
+  const sn = $('#share-native'); sn.hidden = false;
+  sn.addEventListener('click', async () => { try { await navigator.share({title:'Mi informe de UNAKÉ', text:$('#share-text').value}); } catch (e) {} });
+}
+$('#share').addEventListener('click', e => { if (e.target === $('#share')) hideDlg($('#share')); });
+$('#share-copy').addEventListener('click', async () => {
+  const t = $('#share-text');
+  try { await navigator.clipboard.writeText(t.value); $('#share-copy-label').textContent = '¡Copiado! Pégalo en un mensaje'; }
+  catch (e) { t.closest('details').open = true; t.focus(); t.select(); $('#share-copy-label').textContent = 'Seleccionado: cópialo con Ctrl+C o manteniendo pulsado'; }
+});
+
+
+function bootOpen() {
+  renderRules(); renderCast(); renderEpisodes(); renderGallery(); renderQuestions(); renderChips(); renderSummary();
+  if (!A.n) setTimeout(welcome, 600);
+}
+bootOpen();
+</script>
+</body>
+</html>
